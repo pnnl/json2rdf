@@ -29,6 +29,7 @@ def test(json, file_regression):
     j = json
     from json2rdf.json2rdf import j2r
     r = j2r(j)
+    if len(r) > 10_000: raise ValueError('too much data')
 
     def check_fn(obtained_fn, expected_fn):
         o, e = map(lambda f: open(f).read(), (obtained_fn, expected_fn))
