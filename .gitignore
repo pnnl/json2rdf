@@ -14,3 +14,4 @@
 !*.py
 # config
 !uv.lock
+!*.ini
