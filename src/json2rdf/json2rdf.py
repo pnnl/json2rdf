@@ -336,7 +336,7 @@ class RDFing:
         return _
 
 
-def to_rdf(
+def json2rdf(
         data: str | dict,
         meta: str | dict = {},
         *,
@@ -420,13 +420,13 @@ def to_rdf(
     d = str(d)
     return d
 
-
+j2r = json2rdf
 
 if __name__ == '__main__':
     from fire import Fire
     from pathlib import Path
     from inspect import signature as sig
-    args = sig(to_rdf).parameters
+    args = sig(j2r).parameters
     def _(
             i=Path('data.json'), imeta=None,
             asserted =          args['asserted']        .default,
@@ -445,7 +445,7 @@ if __name__ == '__main__':
         from json import load
         data = load(open(i))
         meta = load(open(imeta)) if imeta else args['meta'].default
-        _ = to_rdf(
+        _ = j2r(
                 data, meta=meta,
                 asserted=asserted,
                 sort=sort,
@@ -460,5 +460,5 @@ if __name__ == '__main__':
         else:
             open(o, 'w').write(_)
             return o
-    _.__doc__ = to_rdf.__doc__
+    _.__doc__ = j2r.__doc__
     Fire(_)
