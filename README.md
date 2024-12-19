@@ -37,6 +37,8 @@ Furthermore, the [Python JSON-LD implementation](https://github.com/digitalbazaa
 ## How?
 
 Traversing the (nested) JSON, a conversion is applied to 
+'expand' data containers, lists and mappings, as triples.
+
 
 
 ## Behavior
