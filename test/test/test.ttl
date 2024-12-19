@@ -1,0 +1,25 @@
+prefix rdf:                   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix id:      <urn:example:id:>     
+prefix prefix:     <urn:example:prefix:>    
+prefix meta:    <urn:example:meta:>   
+
+_:2193030313920 prefix:dwid id:33.
+_:2193030313920 prefix:ed _:2193030517952.
+_:2193030313920 prefix:el _:2193030518016.
+_:2193030313920 prefix:k _:2193030513216.
+_:2193030313920 prefix:kk _:2193030513152.
+_:2193030313920 prefix:l _:2193030518144.
+_:2193030513152 prefix:k _:2193030517760.
+_:2193030513216 rdf:_0 _:2193030514304.
+_:2193030514304 prefix:k 3.
+_:2193030514304 prefix:kk "dil".
+_:2193030514304 prefix:kkk true.
+_:2193030517760 prefix:k "did".
+_:2193030518144 rdf:_0 1.
+_:2193030518144 rdf:_1 2.
+_:2193030518144 rdf:_2 3.
+_:2193030518144 rdf:_3 "a".
+_:2193030518144 rdf:_4 "b".
+_:2193030518144 rdf:_5 "c".
+id:33 prefix:id 33.
+id:33 prefix:k "v".
