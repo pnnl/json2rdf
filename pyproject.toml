@@ -1,20 +1,19 @@
 [project]
 name = "json2rdf"
 version = "0.1.0"
-description = "Add your description here"
+description = "Translate JSON to RDF"
 readme = "README.md"
 authors = [
     { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
     { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
 ]
-requires-python = ">=3.11.9"
 dependencies = [
     "boltons", # TODO: vendor just the specific function used
     "numpy", # array encoding. could be optional TODO
     'fire', # cli. could be optional TODO
 ]
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     'pytest',
     'rdflib'  # shouldn't need this as a 'run' dep (above)
 ]
