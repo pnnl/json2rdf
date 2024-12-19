@@ -42,6 +42,24 @@ def rdf():
     """
 
 
+from rdflib import Graph
+def is_eq(g1: Graph|str, g2: Graph|str):
+    from rdflib import Graph
+    g1 = Graph().parse(data=g1, format='text/turtle') if isinstance(g1, str) else g1
+    g2 = Graph().parse(data=g2, format='text/turtle') if isinstance(g2, str) else g2
+    from rdflib.compare import isomorphic
+    return isomorphic(g1, g2)
+
+
+def test_iso():
+    _ = json()
+    from json2rdf.json2rdf import j2r
+    r1 = j2r(_, )
+    r2 = j2r(_,)
+    assert(len(r2) == len(r2))
+    assert(is_eq(r1, r2))
+
+
 
 def test():
     # from rdflib import Graph
@@ -51,7 +69,6 @@ def test():
     _ = json()
     from json2rdf.json2rdf import j2r
     f = j2r(_, array_keys = {'array',} )
-    print()
     print(f)
     #f = Graph().parse(data=f, format='text/turtle')
 
