@@ -1,6 +1,6 @@
 [project]
 name = "json2rdf"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Translate JSON to RDF"
 readme = "README.md"
 authors = [
@@ -25,6 +25,11 @@ json2rdf = "json2rdf:main"
 
 
 [build-system]
+# > uv build
+# > uvx hatchling version major
+# uv backend 'std'
+# https://github.com/astral-sh/uv/issues/3957 
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
+[tool.hatch.version]
+path = "src/json2rdf/__init__.py"
