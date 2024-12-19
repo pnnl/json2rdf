@@ -27,3 +27,7 @@ json2rdf = "json2rdf:main"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.pytest.ini_options]
+testpaths = [
+    "test/test.py",
+]

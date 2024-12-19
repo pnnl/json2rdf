@@ -49,8 +49,8 @@ def test():
     # a = Graph().parse(data=a, format='text/turtle')
 
     _ = json()
-    from json2rdf.json2rdf import to_rdf
-    f = to_rdf(_, array_keys = {'array',} )
+    from json2rdf.json2rdf import j2r
+    f = j2r(_, array_keys = {'array',} )
     print()
     print(f)
     #f = Graph().parse(data=f, format='text/turtle')
