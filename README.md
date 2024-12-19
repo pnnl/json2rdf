@@ -59,8 +59,7 @@ Optional:
 
 
 ## Development Philosophy
-* **KISS**: It should only address converting JSON to RDF.
-Users are responsible for 
+* **KISS**: It should only address converting (given) JSON to RDF.
 Converting array data (above) is a special case.
 * **Minimal dependencies**: follows from above.
 Zero dependencies is possible and ideal.
