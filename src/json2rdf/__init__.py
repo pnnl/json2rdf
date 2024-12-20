@@ -1,2 +1,2 @@
-__version__ = "4"
+__version__ = "1"
 from .json2rdf import json2rdf, j2r

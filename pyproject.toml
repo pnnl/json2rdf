@@ -33,3 +33,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "src/json2rdf/__init__.py"
+
+
+# publish
+# > uv publish
