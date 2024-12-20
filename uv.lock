@@ -75,7 +75,7 @@ wheels = [
 
 [[package]]
 name = "json2rdf"
-version = "30"
+version = "31"
 source = { editable = "." }
 dependencies = [
     { name = "boltons" },
@@ -85,6 +85,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "fire" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-regressions" },
@@ -100,6 +101,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "fire" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-regressions" },

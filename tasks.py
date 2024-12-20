@@ -8,12 +8,14 @@ def run(*p, **k):
     if _.stderr: print(_.stderr)
     return _
 
-def build():
-    run('uv lock --upgrade-package json2rdf')
-    run('uvx hatchling version major')
-    run('git add -u')
+def build(commit=False):
+    if not commit:
+        run('uv lock --upgrade-package json2rdf')
+        run('uvx hatchling version major')
+        run('git add -u') # https://github.com/pre-commit/pre-commit/issues/747#issuecomment-386782080
     run('uv build')
 
 
 if __name__ == '__main__':
-    build()
+    from fire import Fire
+    Fire({'build': build})

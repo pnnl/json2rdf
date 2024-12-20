@@ -4,5 +4,5 @@ repos:
     - id: bump-ver
       name: bump version
       language: system
-      entry: python tasks.py
+      entry: python tasks.py build --commit=True
       pass_filenames: false
