@@ -18,14 +18,16 @@ permissions:
 jobs:
   release-build:
     runs-on: ubuntu-latest
-    container: ghcr.io/astral-sh/uv:alpine
+    container: ghcr.io/astral-sh/uv:debian-slim
 
     steps:
       - uses: actions/checkout@v4
 
+      # - name: set up python above has it?
+      #   run: uv python install
+
       - name: Build release distributions
-        run: |
-          uv run --build uv build
+        run: uv build
 
       - name: Upload distributions
         uses: actions/upload-artifact@v4
