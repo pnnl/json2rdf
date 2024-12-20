@@ -75,12 +75,16 @@ wheels = [
 
 [[package]]
 name = "json2rdf"
-version = "33"
+version = "34"
 source = { editable = "." }
 dependencies = [
     { name = "boltons" },
-    { name = "fire" },
     { name = "numpy" },
+]
+
+[package.optional-dependencies]
+cli = [
+    { name = "fire" },
 ]
 
 [package.dev-dependencies]
@@ -95,7 +99,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "boltons" },
-    { name = "fire" },
+    { name = "fire", marker = "extra == 'cli'" },
     { name = "numpy" },
 ]
 
