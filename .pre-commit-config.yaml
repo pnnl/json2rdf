@@ -4,5 +4,5 @@ repos:
     - id: bump-ver
       name: bump version
       language: system
-      entry: python 
+      entry: python tasks.py
       pass_filenames: false
