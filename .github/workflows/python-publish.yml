@@ -18,7 +18,7 @@ permissions:
 jobs:
   release-build:
     runs-on: ubuntu-latest
-    container: ghcr.io/astral-sh/uv:alphine
+    container: ghcr.io/astral-sh/uv:alpine
 
     steps:
       - uses: actions/checkout@v4
