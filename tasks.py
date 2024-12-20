@@ -6,17 +6,20 @@ def build(commit=False):
         from pathlib import Path
         return run(cmd, *p, cwd=Path(__file__).parent, **k)
     if commit:
-        run('uvx hatchling version major', )
+        run(f'uvx hatchling version {ncommits()}', )
         run('uv lock --upgrade-package json2rdf', )
         # https://github.com/pre-commit/pre-commit/issues/747#issuecomment-386782080
         run('git add -u', )
     run('uv build')
 
-def chk_ver(rev='master'):
-    from json2rdf import __version__ as v
+def ncommits(rev='master'):
     from subprocess import check_output as run
     c = run(f'git rev-list --count {rev}', text=True).strip()
-    return v == c
+    return int(c)
+
+def chk_ver(rev='master'):
+    from json2rdf import __version__ as v
+    return v == ncommits()
 
 if __name__ == '__main__':
     from fire import Fire
