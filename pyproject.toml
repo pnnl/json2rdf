@@ -16,6 +16,7 @@ dependencies = [
 cli = ["fire"]
 [dependency-groups]
 dev = [
+    'ipython', 'ipdb',
     'rdflib',  # shouldn't need this as a 'run' dep (above)
     'pytest',
     'pytest-regressions',
