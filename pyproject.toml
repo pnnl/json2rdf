@@ -16,7 +16,8 @@ dependencies = [
 dev = [
     'rdflib',  # shouldn't need this as a 'run' dep (above)
     'pytest',
-    'pytest-regressions'
+    'pytest-regressions',
+    'pre-commit'
 ]
 
 

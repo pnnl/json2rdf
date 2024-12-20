@@ -13,5 +13,6 @@
 # scripts and progs
 !*.py
 # config
+!*.yaml
 !uv.lock
 !*.ini

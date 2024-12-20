@@ -1,0 +1,8 @@
+repos:
+-   repo: local
+    hooks:
+    - id: bump-ver
+      name: bump version
+      language: system
+      entry: python 
+      pass_filenames: false
