@@ -12,7 +12,7 @@ def classes():
         class NumList(tuple):
             def __str__(self, ):
                 return self.data_encode(self)
-            keys = {'array', }
+            keys = frozenset() #{'array', }
             
             @staticmethod
             def data_encode(d: list) -> str:
