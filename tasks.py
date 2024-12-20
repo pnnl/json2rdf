@@ -10,8 +10,8 @@ def run(*p, **k):
 
 def build(commit=False):
     if commit:
-        run('uv lock --upgrade-package json2rdf')
         run('uvx hatchling version major')
+        run('uv lock --upgrade-package json2rdf')
         run('git add -u') # https://github.com/pre-commit/pre-commit/issues/747#issuecomment-386782080
     run('uv build')
 
