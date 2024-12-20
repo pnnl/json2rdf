@@ -7,6 +7,7 @@ authors = [
     { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
     { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
 ]
+requires-python = ">=3.11"
 dependencies = [
     "boltons", # TODO: vendor just the specific function used
     "numpy", # array encoding. could be optional TODO
