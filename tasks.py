@@ -19,7 +19,7 @@ def ncommits(rev='master'):
 
 def chk_ver(rev='master'):
     from json2rdf import __version__ as v
-    return v == ncommits()
+    return str(v) == str(ncommits(rev=rev))
 
 if __name__ == '__main__':
     from fire import Fire
