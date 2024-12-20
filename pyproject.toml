@@ -21,7 +21,8 @@ dev = [
     'pre-commit',
     'fire'
 ]
-
+[project.urls]
+Repository = "https://github.com/pnnl/json2rdf.git"
 
 [project.scripts]
 json2rdf = "json2rdf:main"

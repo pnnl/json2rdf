@@ -75,7 +75,7 @@ wheels = [
 
 [[package]]
 name = "json2rdf"
-version = "34"
+version = "35"
 source = { editable = "." }
 dependencies = [
     { name = "boltons" },
