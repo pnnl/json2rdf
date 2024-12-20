@@ -1,4 +1,3 @@
-from fire import Fire
 from pathlib import Path
 from inspect import signature as sig
 from . import json2rdf as j2r
@@ -37,4 +36,5 @@ def _(
         open(o, 'w').write(_)
         return o
 _.__doc__ = j2r.__doc__
+from fire import Fire
 _ = Fire(_)
