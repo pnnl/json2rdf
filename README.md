@@ -26,7 +26,7 @@ _:2432178001088 rdf:_2 3.
 
 ## Why?
 
-Motivation: This was developed as part of [BIM2RDF](https://github.com/PNNL/BIM2RDF) where the main implementation language is Python and the data sizes from [Speckle](https://app.speckle.systems/) are not small.
+Motivation: This was developed as part of [BIM2RDF](https://github.com/PNNL/BIM2RDF) where the main implementation language is Python and the data sizes from [Speckle](https://www.speckle.systems/) are not small.
 
 * [Prior implementation](https://github.com/AtomGraph/JSON2RDF)  is in java.
 * Don't want to use [JSON-LD](https://json-ld.org/playground/)
