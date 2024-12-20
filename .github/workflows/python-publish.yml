@@ -17,7 +17,8 @@ permissions:
 
 jobs:
   release-build:
-    runs-on: ghcr.io/astral-sh/uv
+    runs-on: ubuntu-latest
+    container: ghcr.io/astral-sh/uv
 
     steps:
       - uses: actions/checkout@v4
