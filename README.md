@@ -1,3 +1,5 @@
+![PyPI - Status](https://img.shields.io/pypi/v/json2rdf)
+
 # JSON2RDF
 
 Converts JSON to RDF
