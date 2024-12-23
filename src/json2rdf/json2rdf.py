@@ -97,6 +97,10 @@ def classes():
         # @classproperty 'deprecated'
         # def subject_key
         object_keys = {'refid',}
+
+        class list:
+            key =   '__rdftype__'
+            value = '__rdfseq__'
             
         @classmethod
         def enter(cls, p, k, v):
@@ -116,7 +120,10 @@ def classes():
                     ((k,v) for k,v in  v.items() if k not in dids ) )
             elif type(v) is list:
                 # id(lst) is not deterministic. don't think it's a 'problem'
-                return ({subject_key: cls.anonID(id(v)) },
+                return ({
+                        subject_key: cls.anonID(id(v)),
+                        cls.list.key: cls.list.value
+                        },
                         enumerate(v))
             else:
                 assert(isinstance(v, cls.terminals))
@@ -259,6 +266,9 @@ def classes():
             else:
                 assert(type(s) is Identification.anonID)
                 s = f'_:{s}'
+            # special list/seq handling
+            if p == Identification.list.key and o == Identification.list.value:
+                return cls.Triple(s, "rdf:type", "rdf:Seq")
 
             # PREDICATE
             # just need to take care of int predicates
