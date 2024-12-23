@@ -63,6 +63,7 @@ Optional:
 ## Development Philosophy
 * **KISS**: It should only address converting (given) JSON to RDF.
 Converting array data (above) is a special case.
+Therefore, the code is expected to be feature complete (without need for adding more 'features').
 * **Minimal dependencies**: follows from above.
 Zero dependencies is possible and ideal.
 (This would make it easier for a compiled Python version to be created for more performance.)
