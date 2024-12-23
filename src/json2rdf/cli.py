@@ -38,3 +38,4 @@ def _(
 _.__doc__ = j2r.__doc__
 from fire import Fire
 _ = Fire(_)
+exit(0)
