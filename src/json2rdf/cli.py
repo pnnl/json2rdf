@@ -9,8 +9,6 @@ def _(
         # id interpretation
         subject_id_keys =   args['subject_id_keys'] .default,
         object_id_keys =    args['object_id_keys']  .default,
-        # array
-        array_keys =        args['array_keys']      .default,
         # uri construction
         id_prefix =         args['id_prefix']       .default,
         key_prefix =        args['key_prefix']      .default,
@@ -26,7 +24,6 @@ def _(
             sort=sort,
             subject_id_keys=subject_id_keys,
             object_id_keys=object_id_keys,
-            array_keys=array_keys,
             id_prefix=id_prefix,
             key_prefix=key_prefix,
             meta_prefix=meta_prefix,)

@@ -9,66 +9,16 @@ def classes():
     # too lazy to convert them to be able to be instantiated.
     class Termination:
         """ 'pre'-processing """
-        class NumList(tuple):
-            def __str__(self, ):
-                return self.data_encode(self)
-            keys = frozenset() #{'array', }
-            
-            @staticmethod
-            def data_encode(d: list) -> str:
-                from numpy import savez_compressed as save, array
-                #from numpy import save
-                _ = d
-                _ = array(d, dtype='float16')
-                from io import BytesIO
-                def sv(d):
-                    _ = BytesIO()
-                    #save(_, d)
-                    save(_, array=d)
-                    return _
-                _ = sv(_)
-                _.seek(0)
-                _ = _.read()
-                from base64 import b64encode
-                _ = b64encode(_)
-                _ = _.decode()
-                return _
-            @staticmethod
-            def data_decode(d: str) -> 'array':
-                _ = d
-                from base64 import b64decode
-                _ = b64decode(_,)
-                from numpy import load
-                from io import BytesIO
-                _ = BytesIO(_)
-                _ = load(_)
-                _ = _['array']
-                return _
-            
-            @staticmethod
-            def allnum(it):
-                #                 dont think json has complex, so doesn't matter
-                return all(isinstance(i, (float, int, complex) ) for i in it)
-            @staticmethod
-            def interpret(it):#  TODO: could interpret a list of whatever if needed
-                raise NotImplementedError
-
         terminals = {
             int, float,
             str,
             bool,
             type(None), # weird
             # does json have datetime?
-            NumList, # don't traverse these if array
             }
         terminals = tuple(terminals)
         @classmethod
         def visit(cls, p, k, v):
-            if k in cls.NumList.keys:
-                # permissively create. don't insist on below conditions.
-                if isinstance(v, list):
-                    if cls.NumList.allnum(v):
-                        return k, cls.NumList(v)
             return True
 
         @classmethod
@@ -301,8 +251,6 @@ def classes():
                 o = '"'+o+'"'
             elif isinstance(o, (bool, NoneType)): # https://github.com/w3c/json-ld-syntax/issues/258
                 o = m[o]
-            elif isinstance(o, Termination.NumList):
-                o = '"'+str(o)+'"'
             elif isinstance(o, Identification.ID):
                 if type(o) is Identification.ID:
                     o = f'{cls.list.id_prefix}:{o}'
@@ -363,8 +311,6 @@ def json2rdf(
         # id interpretation
         subject_id_keys =   defaults.Identification.subject_keys,
         object_id_keys =    defaults.Identification.object_keys,
-        # array
-        array_keys =         {},#Termination.NumList.keys,
         # # uri construction
         id_prefix =         (defaults.RDFing.list.id_prefix,
                              defaults.RDFing.list.id_uri),
@@ -395,8 +341,6 @@ def json2rdf(
     f = classes()
     f.Identification.subject_keys = [k for k in subject_id_keys if k in frozenset(subject_id_keys)]
     f.Identification.object_keys = frozenset(object_id_keys)
-
-    f.Termination.NumList.keys = frozenset(array_keys)
 
     f.RDFing.list.id_prefix,      f.RDFing.list.id_uri =    id_prefix
     f.RDFing.list.key_prefix,     f.RDFing.list.key_uri =   key_prefix

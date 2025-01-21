@@ -14,7 +14,6 @@ dependencies = [
 ]
 [project.optional-dependencies]
 cli = ["fire"]
-numarray = ['numpy']
 [dependency-groups]
 dev = [
     'ipython', 'ipdb',
@@ -29,7 +28,6 @@ Repository = "https://github.com/pnnl/json2rdf.git"
 
 [project.scripts]
 json2rdf = "json2rdf:cli"
-
 
 [build-system]
 # > uv build

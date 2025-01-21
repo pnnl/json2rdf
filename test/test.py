@@ -36,3 +36,4 @@ def test(json, file_regression):
         if not is_eq(o, e): raise AssertionError
     file_regression.check(r, check_fn=check_fn, extension='.ttl')
     
+# json2rdf -i large-file.json -o data.ttl

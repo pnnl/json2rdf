@@ -28,7 +28,9 @@ _:2432178001088 rdf:_2 3.
 
 ## Why?
 
-Motivation: This was developed as part of [BIM2RDF](https://github.com/PNNL/BIM2RDF) where the main implementation language is Python and the data sizes from [Speckle](https://www.speckle.systems/) are not small.
+Motivation: This was developed as part of [BIM2RDF](https://github.com/PNNL/BIM2RDF)
+where the main implementation language is Python
+and the data sizes from [Speckle](https://www.speckle.systems/) are not small.
 
 * [Prior implementation](https://github.com/AtomGraph/JSON2RDF)  is in java.
 * Don't want to use [JSON-LD](https://json-ld.org/playground/)
@@ -52,14 +54,11 @@ This is close to the 'spirit' of the semantic web.
 However, this makes the conversion non-deterministic.
 Reprecussions must be handled by the user.
 
-TODO: list vs arrays.
 
 ## Features
 
 Optional:
-* **'meta triples'** as RDF-star: `<<{data triple}>> {meta} <<{meta triple}>>`
-* **Numerical Arrays**: Numerical lists can be represented as numpy-encoded strings.
-(This was motivated by the storage of geometry data from 3D design programs).
+**'meta triples'**: as RDF-star: `<<{data triple}>> {meta} <<{meta triple}>>`
 
 
 ## Development Philosophy

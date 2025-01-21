@@ -148,7 +148,7 @@ wheels = [
 
 [[package]]
 name = "json2rdf"
-version = "66"
+version = "67"
 source = { editable = "." }
 dependencies = [
     { name = "boltons" },
@@ -158,9 +158,6 @@ dependencies = [
 [package.optional-dependencies]
 cli = [
     { name = "fire" },
-]
-numarray = [
-    { name = "numpy" },
 ]
 
 [package.dev-dependencies]
@@ -179,7 +176,6 @@ requires-dist = [
     { name = "boltons" },
     { name = "fire", marker = "extra == 'cli'" },
     { name = "numpy" },
-    { name = "numpy", marker = "extra == 'numarray'" },
 ]
 
 [package.metadata.requires-dev]
