@@ -194,14 +194,11 @@ def classes():
             id_uri =                    f"urn:example:{id_prefix}:"
             key_prefix =                'prefix'
             key_uri =                   f"urn:example:{key_prefix}:"
-            meta_prefix =               'meta'
-            meta_uri =                  "urn:example:meta:"
 
             def __str__(self) -> str:
                 _ =     f'prefix rdf:                   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n'
                 _ = _ + f'prefix {self.id_prefix}:      <{self.id_uri}>     \n'
-                _ = _ + f'prefix {self.key_prefix}:     <{self.key_uri}>    \n'
-                _ = _ + f'prefix {self.meta_prefix}:    <{self.meta_uri}>   \n\n'
+                _ = _ + f'prefix {self.key_prefix}:     <{self.key_uri}>    \n\n'
                 _ = _ + super().__str__()
                 return _
         
@@ -264,33 +261,13 @@ def classes():
         @classmethod
         def visit(cls, v):
             assert(isinstance(v, Tripling.Triple))
-            # meta tripling
-            # just do one-level in
-            if isinstance(v.subject, Tripling.Triple):
-                s = cls.triple(v.subject.subject,
-                            v.subject.predicate,
-                            v.subject.object)
-            else:
-                s = v.subject
+            s = v.subject
             p = v.predicate
-            if isinstance(v.object, Tripling.Triple):
-                o = cls.triple(v.object.subject,
-                            v.object.predicate,
-                            v.object.object)
-            else:
-                o = v.object
-            if p == cls.list.meta_uri:
-                p = f"{cls.list.meta_prefix}:"
-                return cls.Triple(s, p, o)
-            else:
-                return cls.triple(s,p,o)
+            o = v.object
+            return cls.triple(s,p,o)
 
         @classmethod
-        def map(cls, d, meta=[], ):
-            if meta:
-                from itertools import product
-                d = product(d, meta)
-                d = map(lambda mt: Tripling.Triple(mt[0], cls.list.meta_uri, mt[1]), d)
+        def map(cls, d, ):
             _ = map(cls.visit, d)
             _ = cls.list(_)
             return _
@@ -304,9 +281,7 @@ def classes():
 defaults = classes()
 def json2rdf(
         data: str | dict,
-        meta: str | dict = {},
         *,
-        asserted =          True,
         sort =              True, # (attempt to) make conversion deterministic
         # id interpretation
         subject_id_keys =   defaults.Identification.subject_keys,
@@ -316,15 +291,8 @@ def json2rdf(
                              defaults.RDFing.list.id_uri),
         key_prefix =        (defaults.RDFing.list.key_prefix,
                              defaults.RDFing.list.key_uri),
-        meta_prefix =       (defaults.RDFing.list.meta_prefix,
-                             defaults.RDFing.list.meta_uri)
         ):
     """
-    meta: meta triples to associate with data triples:
-        <<data triple>> {meta_uri} <<meta triple n>>.
-    asserted: in the case of meta triples, should the data triples be separate?
-          data.subject data.predicate data.object.                                # include this?
-        <<data.subject data.predicate data.object>> {meta_uri} <<meta triple n>>. # ..in addition to this?
     sort: the triples
     subject_keys: set of keys to create a uri out of in for the *subject*.
         the first key will be used to create a predicate if one does not exist.
@@ -344,10 +312,8 @@ def json2rdf(
 
     f.RDFing.list.id_prefix,      f.RDFing.list.id_uri =    id_prefix
     f.RDFing.list.key_prefix,     f.RDFing.list.key_uri =   key_prefix
-    f.RDFing.list.meta_prefix,    f.RDFing.list.meta_uri =  meta_prefix
 
     d = data
-    m = meta
     def triples(data):
         _ = data
         _ = f.Termination.map(_)
@@ -357,28 +323,10 @@ def json2rdf(
     if isinstance(d, str):
         from json import loads
         d = loads(d)
-    if m:
-        if isinstance(m, str):
-            from json import loads
-            m = loads(m)
 
     d = triples(d)
-    if m:
-        m = triples(m)
-        m = f.RDFing.map(d, meta=m)
-        if asserted:
-            # just pull rdfed
-            d = frozenset([t.subject for t in m])
-        else:
-            d = frozenset()
-        # asserted 'data' triples + meta triples
-        _ = frozenset(m) | d  # set->list source of indeterminism
-        if sort:
-            _ = sorted(_, key=str)
-        d = f.RDFing.list(_)
-    else:
-        if sort:
-            d = sorted(d, key=str)
+    if sort:
+        d = sorted(d, key=str)
         d = f.RDFing.map(d)
     d = str(d)
     return d

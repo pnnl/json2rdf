@@ -13,7 +13,6 @@ Converts JSON to RDF
 prefix rdf:                   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix id:      <urn:example:id:>
 prefix prefix:     <urn:example:prefix:>
-prefix meta:    <urn:example:meta:>
 
 id:0 prefix:id 0.
 id:0 prefix:list _:2432178001088.
@@ -57,8 +56,6 @@ Reprecussions must be handled by the user.
 
 ## Features
 
-Optional:
-**'meta triples'**: as RDF-star: `<<{data triple}>> {meta} <<{meta triple}>>`
 
 
 ## Development Philosophy
