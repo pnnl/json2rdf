@@ -60,7 +60,6 @@ Reprecussions must be handled by the user.
 
 ## Development Philosophy
 * **KISS**: It should only address converting (given) JSON to RDF.
-Converting array data (above) is a special case.
 Therefore, the code is expected to be feature complete (without need for adding more 'features').
 * **Minimal dependencies**: follows from above.
 Zero dependencies is possible and ideal.
