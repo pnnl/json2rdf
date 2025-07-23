@@ -13,9 +13,11 @@ def json():
             'k': 'v'
         },
         'dwbadid': {
-            'id':    "sdfsdf \" : ! @ # ",
-            'refid': "sdfsdf \" : ! @ # ",
-            "horrible key @ *$ \" ": "!@#$ sdf  ",
+            'id':    "sdfsdf / \" : ! @ # ",
+            'refid': "sdfsdf / \" : ! @ # ",
+            '/': 'fs',
+            "horrible key @ *$ \" / ": "!@#$ sdf  ",
+            "s p a c e s": "spaced out",
             "key_w_us": "has nice key",
             "CamelCase": "has nice key",
         }

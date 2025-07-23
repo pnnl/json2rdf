@@ -202,7 +202,9 @@ def classes():
                 _ = _ + super().__str__()
                 return _
         
-        from urllib.parse import quote as uq
+        from urllib.parse import quote as urlquote
+        @classmethod
+        def uq(cls, s): return cls.urlquote(s, safe='') # default safe='/' which is *NOT* safe
         @classmethod
         def triple(cls, s, p, o):
             m = {True: 'true', False:'false', None: '\"null\"'} # not rdf:nil which is specific to a rdf:List
