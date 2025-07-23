@@ -1,28 +1,33 @@
 prefix rdf:                   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 prefix id:      <urn:example:id:>     
 prefix prefix:     <urn:example:prefix:>    
-prefix meta:    <urn:example:meta:>   
 
-_:2380581804288 prefix:k _:2380627818112.
-_:2380616502144 rdf:_0 _:2380627815424.
-_:2380616502144 rdf:type rdf:Seq.
-_:2380627776832 prefix:dwid id:33.
-_:2380627776832 prefix:ed _:2380627818880.
-_:2380627776832 prefix:el _:2380627818944.
-_:2380627776832 prefix:k _:2380616502144.
-_:2380627776832 prefix:kk _:2380581804288.
-_:2380627776832 prefix:l _:2380627819072.
-_:2380627815424 prefix:k 3.
-_:2380627815424 prefix:kk "dil".
-_:2380627815424 prefix:kkk true.
-_:2380627818112 prefix:k "did".
-_:2380627818944 rdf:type rdf:Seq.
-_:2380627819072 rdf:_0 1.
-_:2380627819072 rdf:_1 2.
-_:2380627819072 rdf:_2 3.
-_:2380627819072 rdf:_3 "a".
-_:2380627819072 rdf:_4 "b".
-_:2380627819072 rdf:_5 "c".
-_:2380627819072 rdf:type rdf:Seq.
+_:2406051654912 prefix:dwbadid id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20.
+_:2406051654912 prefix:dwid id:33.
+_:2406051654912 prefix:ed _:2406089670336.
+_:2406051654912 prefix:el _:2406089670400.
+_:2406051654912 prefix:k _:2406089764352.
+_:2406051654912 prefix:kk _:2406052732160.
+_:2406051654912 prefix:l _:2406089670528.
+_:2406052732160 prefix:k _:2406089530496.
+_:2406089530496 prefix:k "did".
+_:2406089670400 rdf:type rdf:Seq.
+_:2406089670528 rdf:_0 1.
+_:2406089670528 rdf:_1 2.
+_:2406089670528 rdf:_2 3.
+_:2406089670528 rdf:_3 "a".
+_:2406089670528 rdf:_4 "b".
+_:2406089670528 rdf:_5 "c".
+_:2406089670528 rdf:type rdf:Seq.
+_:2406089764352 rdf:_0 _:2406089764416.
+_:2406089764352 rdf:type rdf:Seq.
+_:2406089764416 prefix:k 3.
+_:2406089764416 prefix:kk "dil".
+_:2406089764416 prefix:kkk true.
 id:33 prefix:id 33.
 id:33 prefix:k "v".
+id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20 prefix:CamelCase "has nice key".
+id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20 prefix:horrible%20key%20%40%20%2A%24%20%22%20 "!@#$ sdf  ".
+id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20 prefix:id "sdfsdf \" : ! @ # ".
+id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20 prefix:key_w_us "has nice key".
+id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20 prefix:refid id:sdfsdf%20%22%20%3A%20%21%20%40%20%23%20.

@@ -11,6 +11,13 @@ def json():
         'dwid': {
             'id': 33,
             'k': 'v'
+        },
+        'dwbadid': {
+            'id':    "sdfsdf \" : ! @ # ",
+            'refid': "sdfsdf \" : ! @ # ",
+            "horrible key @ *$ \" ": "!@#$ sdf  ",
+            "key_w_us": "has nice key",
+            "CamelCase": "has nice key",
         }
     }
 

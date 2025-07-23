@@ -46,7 +46,7 @@ def classes():
         # subject_key = subject_keys[0] 
         # @classproperty 'deprecated'
         # def subject_key
-        object_keys = {'refid',}
+        object_keys = {'refid', 'idref' }
 
         class list:
             key =   '__rdftype__'
@@ -202,6 +202,7 @@ def classes():
                 _ = _ + super().__str__()
                 return _
         
+        from urllib.parse import quote as uq
         @classmethod
         def triple(cls, s, p, o):
             m = {True: 'true', False:'false', None: '\"null\"'} # not rdf:nil which is specific to a rdf:List
@@ -209,9 +210,13 @@ def classes():
             # SUBJECT
             assert(isinstance(s, Identification.ID))
             if type(s) is Identification.ID:
+                s = str(s)
+                s = cls.uq(s)
                 s = f'{cls.list.id_prefix}:{s}'
             else:
                 assert(type(s) is Identification.anonID)
+                s = str(s)
+                s = cls.uq(s)
                 s = f'_:{s}'
             # special list/seq handling
             if p == Identification.list.key and o == Identification.list.value:
@@ -223,10 +228,7 @@ def classes():
                 p = f'rdf:_{p}'
             else:
                 assert(isinstance(p, str))
-                p = p.replace(' ', '_')
-                # create legal by dropping non alpha num
-                # url encodeing?
-                p = ''.join(c for c in p if c.isalnum() or c == '_')
+                p = cls.uq(p)
                 p = f'{cls.list.key_prefix}:{p}'
             
             # OBJECT
@@ -250,9 +252,13 @@ def classes():
                 o = m[o]
             elif isinstance(o, Identification.ID):
                 if type(o) is Identification.ID:
+                    o = str(o)
+                    o = cls.uq(o)
                     o = f'{cls.list.id_prefix}:{o}'
                 else:
                     assert(type(o) is Identification.anonID)
+                    o = str(o)
+                    o = cls.uq(o)
                     o = f'_:{o}'
             else:
                 o = str(o)
