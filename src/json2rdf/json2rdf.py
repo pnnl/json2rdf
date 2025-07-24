@@ -204,7 +204,20 @@ def classes():
         
         from urllib.parse import quote as urlquote
         @classmethod
-        def uq(cls, s): return cls.urlquote(s, safe='') # default safe='/' which is *NOT* safe
+        def uq(cls, s):
+            #the characters '_.-~' are never quoted. bc some new rfc
+            # https://datatracker.ietf.org/doc/html/rfc3986.html
+            # but ~ bad for ttl.
+            # and period cant be in the end.
+            #period (%2E) or tilde (%7E)
+            if s:
+                ll = s[-1]
+                if ll == '.': 
+                    ll = f'%2E' # cant end with dot
+                    s = s[:-1]+ll
+                if '~' in s: # always a problem
+                    s = s.replace('~', '%7E')
+            return cls.urlquote(s, safe='') # default safe='/' which is *NOT* safe
         @classmethod
         def triple(cls, s, p, o):
             m = {True: 'true', False:'false', None: '\"null\"'} # not rdf:nil which is specific to a rdf:List
