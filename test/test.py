@@ -20,6 +20,10 @@ def json():
             "s p a c e s": "spaced out",
             "key_w_us": "has nice key",
             "CamelCase": "has nice key",
+            '~.': 'not allowed at the end',
+            '.': 'not allowed at the end',
+            '~': 'tilde sucks',
+            'x~x': 'tilde sucks',
         }
     }
 
