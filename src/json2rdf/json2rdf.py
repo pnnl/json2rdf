@@ -320,7 +320,7 @@ def json2rdf(
         example: {"id": 1, "key":"abc" } ->
             prefix:1 prefix:key "abc".
             prefix:1 prefix:id prefix:1.
-        example: case when no id key: {"key: "abc"} ->
+        example: case when no id key in data or no id key is set: {"key: "abc"} ->
             prefix:generated prefix:key "abc".
             prefix:generated prefix:id prefix:generated.
     object_keys: set of keys to interpret as a uri out of as an *object*.
@@ -328,6 +328,9 @@ def json2rdf(
             prefix:1 prefix:refid prefix:2.
     """
     f = classes()
+    if not subject_id_keys:  # hack for the case when no identifier is desired from the input
+        import uuid          # todo: ya right.
+        subject_id_keys = {str(uuid.uuid4())} # impossible key in data
     f.Identification.subject_keys = [k for k in subject_id_keys if k in frozenset(subject_id_keys)]
     f.Identification.object_keys = frozenset(object_id_keys)
 
