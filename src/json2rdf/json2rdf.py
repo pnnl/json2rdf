@@ -120,20 +120,24 @@ def classes():
         
         @classmethod
         def enter(cls, p, k, v):
-            subject_key = Identification.subject_keys[0]
             if isinstance(v, dict):
-                assert(subject_key in v)
-                def _(v):
+                assert(any(sk in v for sk in Identification.subject_keys))
+                def _(v, subject_key):
                     for ik, iv in v.items():
                         if isinstance(iv, dict):
-                            yield from (
-                                cls.Triple(v[subject_key] , ik, iv[subject_key] ),
-                                iv, )
+                            for sk in Identification.subject_keys:
+                                if sk in iv:
+                                    yield from (
+                                        cls.Triple(v[subject_key] , ik, iv[sk] ),
+                                        iv, )
                         else:
                             assert(isinstance(iv, Identification.terminals ))
                             if not ((ik in Identification.subject_keys) and (type(iv) is Identification.anonID)):
                                 yield cls.Triple(v[subject_key], ik, iv)
-                return cls.list(), enumerate(_(v))
+                def __(v):
+                    for sk in Identification.subject_keys:
+                        if sk in v: yield from _(v, sk)
+                return cls.list(), enumerate(__(v))
             else:
                 assert(isinstance(v, cls.Triple))
                 # no nesting. no need to 'enter'

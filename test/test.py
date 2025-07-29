@@ -3,8 +3,10 @@ import pytest
 @pytest.fixture
 def json():
     return {
+        'id': 'id',
+        'id2': 'id2',
         'k': [
-            {'k': 3, 'kk': 'dil', 'kkk': True}
+            {'k': 3, 'kk': 'dil', 'kkk': True, 'kd': {'id2': 'kkk2', 'id': 'kkk', 'dkk': {'deep': 3} } }
         ],
         'kk': { 'k': {'k': 'did'} },
         'ed': {}, 'el': [], 'l': [1,2,3, 'a', 'b','c'],
@@ -41,7 +43,7 @@ def is_eq(g1: Graph|str, g2: Graph|str):
 def test(json, file_regression):
     j = json
     from json2rdf.json2rdf import j2r
-    r = j2r(j)
+    r = j2r(j, subject_id_keys={'id', 'id2'})
     if len(r) > 10_000: raise ValueError('too much data')
 
     def check_fn(obtained_fn, expected_fn):
