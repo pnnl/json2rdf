@@ -42,6 +42,7 @@ def classes():
         terminals = tuple(terminals)
 
         subject_keys = ('id',)
+        deanon = False
         # cant do 
         # subject_key = subject_keys[0] 
         # @classproperty 'deprecated'
@@ -51,6 +52,14 @@ def classes():
         class list:
             key =   '__rdftype__'
             value = '__rdfseq__'
+        
+        @classmethod
+        def maybeanon(cls, id):
+            if cls.deanon:
+                return cls.ID(id)
+            else:
+                assert(cls.deanon is False)
+                return cls.anonID(id)
             
         @classmethod
         def enter(cls, p, k, v):
@@ -59,19 +68,20 @@ def classes():
                 for id in cls.subject_keys:
                     if id in v:
                         yield id
+
             if type(v) is dict:
                 dids = dicthasid(v)
                 dids = tuple(dids)
                 return (
                     #        wrap in ID
                     {sk: cls.ID(v[sk]) for sk in dids}
-                    or {subject_key: cls.anonID(id(v))},
+                    or {subject_key: cls.maybeanon(id(v))},
                     #       ..the rest of the data
                     ((k,v) for k,v in  v.items() if k not in dids ) )
             elif type(v) is list:
                 # id(lst) is not deterministic. don't think it's a 'problem'
                 return ({
-                        subject_key: cls.anonID(id(v)),
+                        subject_key: cls.maybeanon(id(v)),
                         cls.list.key: cls.list.value
                         },
                         enumerate(v))
@@ -117,6 +127,7 @@ def classes():
             def __str__(self) -> str:
                 _ = '\n'.join([str(i) for i in self])
                 return _
+        _exclude_keys = {}
         
         @classmethod
         def enter(cls, p, k, v):
@@ -133,7 +144,8 @@ def classes():
                         else:
                             assert(isinstance(iv, Identification.terminals ))
                             if not ((ik in Identification.subject_keys) and (type(iv) is Identification.anonID)):
-                                yield cls.Triple(v[subject_key], ik, iv)
+                                if ik not in cls._exclude_keys:
+                                    yield cls.Triple(v[subject_key], ik, iv)
                 def __(v):
                     for sk in Identification.subject_keys:
                         if sk in v: yield from _(v, sk)
@@ -310,6 +322,7 @@ def json2rdf(
         sort =              True, # (attempt to) make conversion deterministic
         # id interpretation
         subject_id_keys =   defaults.Identification.subject_keys,
+        deanon:bool =       defaults.Identification.deanon,
         object_id_keys =    defaults.Identification.object_keys,
         # # uri construction
         id_prefix =         (defaults.RDFing.list.id_prefix,
@@ -330,11 +343,15 @@ def json2rdf(
     object_keys: set of keys to interpret as a uri out of as an *object*.
         example: {"id": 1, "refid": 2,} ->
             prefix:1 prefix:refid prefix:2.
+    deanon: can be set to True to use id_prefix when no id key is present.
+        otherwise, a blank/anon node will be used.
     """
     f = classes()
     if not subject_id_keys:  # hack for the case when no identifier is desired from the input
         import uuid          # todo: ya right.
         subject_id_keys = {str(uuid.uuid4())} # impossible key in data
+        f.Tripling._exclude_keys = subject_id_keys
+    f.Identification.deanon = deanon
     f.Identification.subject_keys = [k for k in subject_id_keys if k in frozenset(subject_id_keys)]
     f.Identification.object_keys = frozenset(object_id_keys)
 
