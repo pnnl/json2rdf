@@ -228,9 +228,15 @@ def classes():
             #period (%2E) or tilde (%7E)
             if s:
                 ll = s[-1]
+                fl = s[0]
                 if ll == '.': 
                     ll = f'%2E' # cant end with dot
                     s = s[:-1]+ll
+                #https://w3c.github.io/rdf-tests/rdf/rdf11/rdf-turtle/
+                #https://w3c.github.io/rdf-tests/rdf/rdf11/rdf-turtle/turtle-syntax-bad-ln-dash-start.ttl
+                if fl == '-':
+                    fl = '%2D'
+                    s = fl + s[1:]
                 if '~' in s: # always a problem
                     s = s.replace('~', '%7E')
             return cls.urlquote(s, safe='') # default safe='/' which is *NOT* safe

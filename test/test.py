@@ -26,6 +26,11 @@ def json():
             '.': 'not allowed at the end',
             '~': 'tilde sucks',
             'x~x': 'tilde sucks',
+        },
+        "--- Clearance (On/Off) Constraints ---": {
+                        "name": "--- Clearance (On/Off) Constraints ---",
+                        "value": "---",
+                        "internalDefinitionName": "--- Clearance (On/Off) Constraints ---"
         }
     }
 
