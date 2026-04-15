@@ -49,9 +49,11 @@ Traversing the (nested) JSON, a conversion is applied to
 is 'entity-driven': data containers must have identifiers.
 When no identifier is given, an anoymous/blank node is used.
 This is close to the 'spirit' of the semantic web.
-
 However, this makes the conversion non-deterministic.
 Reprecussions must be handled by the user.
+
+[Nulls are preserved](https://github.com/w3c/json-ld-syntax/issues/258)
+as it would be the 'least surprising' behviour.
 
 
 ## Features
