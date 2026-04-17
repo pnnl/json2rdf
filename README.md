@@ -24,6 +24,36 @@ _:2432178001088 rdf:_1 2.
 _:2432178001088 rdf:_2 3.
 ```
 
+```
+Help on function json2rdf in module json2rdf.json2rdf:
+
+json2rdf(
+    data: str | dict,
+    *,
+    sort=True,
+    subject_id_keys=('id',),
+    deanon: bool = False,
+    object_id_keys={'idref', 'refid'},
+    id_prefix=('id', 'urn:example:id:'),
+    key_prefix=('prefix', 'urn:example:prefix:')
+)
+    sort: the triples
+    subject_keys: set of keys to create a uri out of in for the *subject*.
+        the first key will be used to create a predicate if one does not exist.
+        example: {"id": 1, "key":"abc" } ->
+            prefix:1 prefix:key "abc".
+            prefix:1 prefix:id prefix:1.
+        example: case when no id key in data or no id key is set: {"key: "abc"} ->
+            prefix:generated prefix:key "abc".
+            prefix:generated prefix:id prefix:generated.
+    object_keys: set of keys to interpret as a uri out of as an *object*.
+        example: {"id": 1, "refid": 2,} ->
+            prefix:1 prefix:refid prefix:2.
+    deanon: can be set to True to use id_prefix when no id key is present.
+        otherwise, a blank/anon node will be used.
+
+
+```
 
 ## Why?
 
@@ -47,10 +77,18 @@ Traversing the (nested) JSON, a conversion is applied to
 ## Behavior
 
 is 'entity-driven': data containers must have identifiers.
+
 When no identifier is given, an anoymous/blank node is used.
 This is close to the 'spirit' of the semantic web.
 However, this makes the conversion non-deterministic.
 Reprecussions must be handled by the user.
+
+`deanon=True` can be passed as an argument
+which will use `id_prefix` instead of a blank node.
+While reading of the rdf will be deterministic,
+the conversion cannot be considered so.
+(It's only deterministic per Python session
+if the same `dict` data instance is read.)
 
 [Nulls are preserved](https://github.com/w3c/json-ld-syntax/issues/258)
 as it would be the 'least surprising' behviour.
