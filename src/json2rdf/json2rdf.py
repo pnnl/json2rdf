@@ -376,9 +376,8 @@ def json2rdf(
         d = loads(d)
 
     d = triples(d)
-    if sort:
-        d = sorted(d, key=str)
-        d = f.RDFing.map(d)
+    if sort: d = sorted(d, key=str)
+    d = f.RDFing.map(d)
     d = str(d)
     return d
 
