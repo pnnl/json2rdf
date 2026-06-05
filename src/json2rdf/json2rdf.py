@@ -78,12 +78,12 @@ def classes():
                 return (
                     #        wrap in ID
                     {sk: cls.ID(v[sk]) for sk in dids}
-                    or {subject_key: cls.maybeanon(id())},
+                    or {subject_key: cls.maybeanon(str(id()))},
                     #       ..the rest of the data
                     ((k,v) for k,v in  v.items() if k not in dids ) )
             elif type(v) is list:
                 return ({
-                        subject_key: cls.maybeanon(id()),
+                        subject_key: cls.maybeanon(str(id())),
                         cls.list.key: cls.list.value
                         },
                         enumerate(v))
