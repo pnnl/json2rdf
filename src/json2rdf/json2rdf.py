@@ -69,19 +69,21 @@ def classes():
                     if id in v:
                         yield id
 
+            from uuid import uuid4 as id
+            # not creating a content-based id. not the responsibility of this code.
+            # cannot create an incremental id. not unique enough.
             if type(v) is dict:
                 dids = dicthasid(v)
                 dids = tuple(dids)
                 return (
                     #        wrap in ID
                     {sk: cls.ID(v[sk]) for sk in dids}
-                    or {subject_key: cls.maybeanon(id(v))},
+                    or {subject_key: cls.maybeanon(id())},
                     #       ..the rest of the data
                     ((k,v) for k,v in  v.items() if k not in dids ) )
             elif type(v) is list:
-                # id(lst) is not deterministic. don't think it's a 'problem'
                 return ({
-                        subject_key: cls.maybeanon(id(v)),
+                        subject_key: cls.maybeanon(id()),
                         cls.list.key: cls.list.value
                         },
                         enumerate(v))

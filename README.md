@@ -87,8 +87,6 @@ Reprecussions must be handled by the user.
 which will use `id_prefix` instead of a blank node.
 While reading of the rdf will be deterministic,
 the conversion cannot be considered so.
-(It's only deterministic per Python session
-if the same `dict` data instance is read.)
 
 [Nulls are preserved](https://github.com/w3c/json-ld-syntax/issues/258)
 as it would be the 'least surprising' behviour.
