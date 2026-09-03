@@ -11,6 +11,7 @@ def _(
         # uri construction
         id_prefix =         args['id_prefix']       .default,
         key_prefix =        args['key_prefix']      .default,
+        deanon =            args['deanon']          .default,
         o: Path|None=None,#Path('data.ttl'),
         ):
     from json import load
@@ -21,7 +22,9 @@ def _(
             subject_id_keys=subject_id_keys,
             object_id_keys=object_id_keys,
             id_prefix=id_prefix,
-            key_prefix=key_prefix,)
+            key_prefix=key_prefix,
+            deanon=deanon,
+            )
     if not o:
         return _
     else:
