@@ -48,7 +48,7 @@ def is_eq(g1: Graph|str, g2: Graph|str):
 def test(json, file_regression):
     j = json
     from json2rdf.json2rdf import j2r
-    r = j2r(j, subject_id_keys={'id', 'id2'})
+    r = j2r(j, subject_id_keys={'id', 'id2'}, object_id_keys={'refid'},  deanon=False, sort=True)
     if len(r) > 10_000: raise ValueError('too much data')
 
     def check_fn(obtained_fn, expected_fn):

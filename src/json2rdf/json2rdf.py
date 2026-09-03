@@ -41,13 +41,13 @@ def classes():
         terminals = {Termination.terminals}|{ID, anonID}
         terminals = tuple(terminals)
 
-        subject_keys = ('id',)
-        deanon = False
+        subject_keys = () # often ('id',)
+        deanon = True
         # cant do 
         # subject_key = subject_keys[0] 
         # @classproperty 'deprecated'
         # def subject_key
-        object_keys = {'refid', 'idref' }
+        object_keys = {} #  {'refid', 'idref' }
 
         class list:
             key =   '__rdftype__'
@@ -327,7 +327,7 @@ defaults = classes()
 def json2rdf(
         data: str | dict,
         *,
-        sort =              True, # (attempt to) make conversion deterministic
+        sort =              False, # (attempt to) make conversion deterministic
         # id interpretation
         subject_id_keys =   defaults.Identification.subject_keys,
         deanon:bool =       defaults.Identification.deanon,

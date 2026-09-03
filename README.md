@@ -7,7 +7,7 @@ Converts JSON to RDF
 ```python
 >>> from json2rdf.json2rdf import j2r
 >>> j = {'id':0, 'list': [1,2,3], 'nesting': {'id':1, 'property': 'abc' }}
->>> print(j2r(j))
+>>> print(j2r(j, subject_id_keys=('id',), sort=False, deanon=False ))
 ```
 ```turtle
 prefix rdf:                   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -76,17 +76,21 @@ Traversing the (nested) JSON, a conversion is applied to
 
 ## Behavior
 
-is 'entity-driven': data containers must have identifiers.
+is 'entity-driven': data containers should have identifiers.
 
-When no identifier is given, an anoymous/blank node is used.
-This is close to the 'spirit' of the semantic web.
+
+But, the default settings make no assumptions about data identifier keys (like 'id').
+Instead, a uri will be created with a UUID (prefixed with `id_prefix`).
 However, this makes the conversion non-deterministic.
 Reprecussions must be handled by the user.
 
-`deanon=True` can be passed as an argument
-which will use `id_prefix` instead of a blank node.
-While reading of the rdf will be deterministic,
-the conversion cannot be considered so.
+When identifier keys are known, it's best to set `subject_keys` and `object_keys`,
+to create a (deterministic) uri from them.
+Furthermore, `sort` can be set to `True` for determinism of the generated RDF (as a whole).
+`deanon` can be set to `False`,
+to use an anoymous/blank node when no identifier key is found
+signaling an issue with the data (losing determinism).
+This is close to the 'spirit' of the semantic web.
 
 [Nulls are preserved](https://github.com/w3c/json-ld-syntax/issues/258)
 as it would be the 'least surprising' behviour.
