@@ -24,19 +24,20 @@ _:2432178001088 rdf:_1 2.
 _:2432178001088 rdf:_2 3.
 ```
 
+```python
+>>> from json2rdf import j2r
+>>> help(j2r)
+Help on function json2rdf in module json2rdf.json2rdf:                    
+json2rdf(data: str | dict,
+ *,
+ sort=False,
+ subject_id_keys=(),
+ deanon: bool = True,
+ object_id_keys={},
+ id_prefix=('id', 'urn:example:id:'),
+ key_prefix=('prefix', 'urn:example:prefix:'))
 ```
-Help on function json2rdf in module json2rdf.json2rdf:
-
-json2rdf(
-    data: str | dict,
-    *,
-    sort=True,
-    subject_id_keys=('id',),
-    deanon: bool = False,
-    object_id_keys={'idref', 'refid'},
-    id_prefix=('id', 'urn:example:id:'),
-    key_prefix=('prefix', 'urn:example:prefix:')
-)
+```
     sort: the triples
     subject_keys: set of keys to create a uri out of in for the *subject*.
         the first key will be used to create a predicate if one does not exist.
@@ -51,8 +52,6 @@ json2rdf(
             prefix:1 prefix:refid prefix:2.
     deanon: can be set to True to use id_prefix when no id key is present.
         otherwise, a blank/anon node will be used.
-
-
 ```
 
 ## Why?
